@@ -13,12 +13,13 @@ var connection =  new Client({
 
 connection.connect();
 
-let prep = connection.prepare('SELECT * FROM team WHERE first_name = :first_name');
-let name = 'Jonny';
+// let prep = connection.prepare('SELECT * FROM bus_stops WHERE name = :name');
+let prep = connection.prepare('SELECT * FROM bus_stops');
+let name = 'RURAL and APACHE';
 // let prep = connection.prepare('SELECT * FROM team');
 
 // return all rows
-connection.query(prep({first_name : name}), function(err, rows, fields) {
+connection.query(prep({name : name}), function(err, rows, fields) {
      if (!err) {
           console.log("The solution is ", rows);
      } else {
