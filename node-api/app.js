@@ -63,8 +63,8 @@ app.post('/team', function(req, res) {
           }
           console.log('Successfuly Post!');
           res.json(rows);
-     })
-})
+     });
+});
 
 // app.get('/team/:id', function(req, res) {
 //      let id = req.params.id;
