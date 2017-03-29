@@ -17,17 +17,6 @@ connection.connect();
 
 let prep = connection.prepare('SELECT * FROM team WHERE first_name = :first_name');
 let name = 'Jonny';
-// let prep = connection.prepare('SELECT * FROM team');
-
-// return all rows
-// connection.query(prep({first_name : name}), function(err, rows, fields) {
-//      if (!err) {
-//           console.log("The solution is ", rows);
-//      } else {
-//           console.log(err);
-//      }
-// });
-
 
 
 app.get('/', function(req, res) {
@@ -59,6 +48,23 @@ app.get('/team/:id', function(req, res) {
      res.json(rows);
      });
 });
+
+app.post('/team', function(req, res) {
+     let first_name = req.body.first_name;
+     let last_name = req.body.last_name;
+     let username = req.body.username;
+     let role = req.body.role;
+     let coffee = req.body.coffee;
+     connection.query("INSERT INTO team VALUES('',?,?,?,?,?)", [first_name, last_name, username, role, coffee],
+     function(err, rows, fields) {
+          if (err) {
+               console.log(err);
+               throw err;
+          }
+          console.log('Successfuly Post!');
+          res.json(rows);
+     })
+})
 
 // app.get('/team/:id', function(req, res) {
 //      let id = req.params.id;

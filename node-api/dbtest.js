@@ -13,9 +13,9 @@ var connection =  new Client({
 
 connection.connect();
 
-// let prep = connection.prepare('SELECT * FROM bus_stops WHERE name = :name');
-let prep = connection.prepare('SELECT * FROM bus_stops');
-let name = 'RURAL and APACHE';
+let prep = connection.prepare('SELECT * FROM team WHERE first_name = :name');
+// let prep = connection.prepare('SELECT * FROM bus_stops');
+let name = 'Sebastian';
 // let prep = connection.prepare('SELECT * FROM team');
 
 // return all rows
