@@ -15,8 +15,6 @@ var connection =  new Client({
 
 connection.connect();
 
-let prep = connection.prepare('SELECT * FROM team WHERE first_name = :first_name');
-let name = 'Jonny';
 
 
 app.get('/', function(req, res) {
@@ -49,6 +47,20 @@ app.get('/team/:id', function(req, res) {
      });
 });
 
+app.get('/team/name/:name', function(req, res) {
+     let name = req.params.name;
+     let prep = connection.prepare('SELECT * FROM team WHERE first_name = :first_name');
+     connection.query(prep({first_name : name}), function(err, rows, result) {
+     connection.end();
+     if (err) {
+          console.log(err);
+          throw err;
+     } 
+     console.log('The solution is: ', rows);
+     res.json(rows);
+     });
+});
+
 app.post('/team', function(req, res) {
      let first_name = req.body.first_name;
      let last_name = req.body.last_name;
@@ -66,19 +78,6 @@ app.post('/team', function(req, res) {
      });
 });
 
-// app.get('/team/:id', function(req, res) {
-//      let id = req.params.id;
-//      let prep = connection.prepare('SELECT * FROM bus_stops WHERE team_id = :team_id');
-//      connection.query(prep({team_id : id}), data, function(err, result) {
-//      connection.end();
-//      if (err) {
-//           console.log(err);
-//           throw err;
-//      } 
-//      console.log('The solution is: ', rows);
-//      res.json(rows);
-//      });
-// });
 
 app.use(function(req, res) {
      res.sendStatus(404);
