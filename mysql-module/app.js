@@ -10,24 +10,17 @@ const team = require('./models/team');
 
 app.use(bodyParser.json());
 
-var connection =  mariadb.createConnection({
-     host: process.env.DB_HOST,
-     user: process.env.DB_USER,
-     password: process.env.DB_PASS,
-     database: 'hoodmvp'
-});
+// var connection =  mariadb.createConnection({
+//      host: process.env.DB_HOST,
+//      user: process.env.DB_USER,
+//      password: process.env.DB_PASS,
+//      database: 'hoodmvp'
+// });
 
-connection.connect();
+// connection.connect();
 
 app.get('/', function(req, res) {
-     connection.query('SELECT * from team', function(err, rows, fields) {
-          // connection.end();
-          if (err) {
-               console.log(err);
-               throw err;
-          }
-          res.json(rows) ;
-     });
+     res.send('got to /team to start the api!');
 });
 
 app.get('/team', function(req, res) {
